@@ -1,0 +1,6 @@
+{{ 'krea3d.css' | asset_url | stylesheet_tag }}
+
+<div style="max-width:860px;margin:0 auto;padding:72px clamp(20px,4vw,40px);font-family:'Nunito',sans-serif;">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;color:#2a2220;margin-bottom:24px;">{{ page.title }}</h1>
+  <div style="color:#5e4f46;font-size:16px;line-height:1.85;">{{ page.content }}</div>
+</div>
