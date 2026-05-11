@@ -1,0 +1,127 @@
+
+<section class="krea3d-section krea3d-about" id="nosotros">
+  <div class="krea3d-about__inner">
+    <div class="krea3d-about__visual">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 800 }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          loading="lazy"
+          width="800"
+          height="800"
+        >
+      {%- else -%}
+        <svg viewBox="0 0 360 360" style="width:80%;height:80%" aria-hidden="true">
+          <circle cx="180" cy="180" r="110" fill="#d4849a" opacity="0.1"/>
+          <circle cx="180" cy="180" r="80" fill="#d4849a" opacity="0.1"/>
+          {%- for r in '0,45,90,135,180,225,270,315' | split: ',' -%}
+            <line x1="{{ 180 | plus: 66 }}" y1="{{ 180 }}" x2="{{ 180 | plus: 100 }}" y2="{{ 180 }}"
+              stroke="#d4849a" stroke-width="2" opacity="0.38" transform="rotate({{ r }} 180 180)"/>
+          {%- endfor -%}
+          {%- for r in '0,60,120,180,240,300' | split: ',' -%}
+            <ellipse cx="180" cy="120" rx="14" ry="26" fill="#d4849a" opacity="0.55"
+              transform="rotate({{ r }} 180 180)" />
+          {%- endfor -%}
+          <circle cx="180" cy="180" r="18" fill="#d4849a" />
+          <circle cx="180" cy="180" r="9" fill="white" opacity="0.5" />
+          <circle cx="180" cy="180" r="50" fill="none" stroke="#8fbf8a" stroke-width="1.5" stroke-dasharray="7 5" opacity="0.5"/>
+        </svg>
+      {%- endif -%}
+      <div class="krea3d-about__badge">
+        <div class="krea3d-about__badge-num">{{ section.settings.badge_number }}</div>
+        <div class="krea3d-about__badge-label">{{ section.settings.badge_label }}</div>
+      </div>
+    </div>
+
+    <div class="krea3d-about__text">
+      <div class="krea3d-section-header" style="text-align:left;margin-bottom:0;">
+        <span class="krea3d-section-eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="krea3d-section-title">{{ section.settings.heading }}</h2>
+      </div>
+      <p style="margin-top:24px;">{{ section.settings.paragraph1 }}</p>
+      <p>{{ section.settings.paragraph2 }}</p>
+      <div class="krea3d-about__actions">
+        <a href="{{ section.settings.cta_link }}" class="krea3d-btn-primary">{{ section.settings.cta_label }}</a>
+        <a href="{{ section.settings.link2_url }}" class="krea3d-btn-link">{{ section.settings.link2_label }} →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Krea3D — Nosotros",
+  "tag": "section",
+  "class": "krea3d-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen (opcional)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto pequeño superior",
+      "default": "Pasión en cada capa"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Nuestra historia"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph1",
+      "label": "Párrafo 1",
+      "default": "Krea3D nació de una pasión por transformar ideas en objetos tangibles. Somos un emprendimiento dedicado a la impresión 3D decorativa, donde cada pieza es diseñada y fabricada con amor y atención al detalle."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph2",
+      "label": "Párrafo 2",
+      "default": "Desde flores que nunca se marchitan hasta figuras coleccionables y lámparas únicas — creemos que el arte puede estar en cada rincón de tu hogar."
+    },
+    {
+      "type": "text",
+      "id": "badge_number",
+      "label": "Número del badge",
+      "default": "100%"
+    },
+    {
+      "type": "text",
+      "id": "badge_label",
+      "label": "Texto del badge",
+      "default": "Hecho a mano"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto del botón principal",
+      "default": "Hacer un pedido"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link del botón principal"
+    },
+    {
+      "type": "text",
+      "id": "link2_label",
+      "label": "Texto del link secundario",
+      "default": "Ver la galería"
+    },
+    {
+      "type": "url",
+      "id": "link2_url",
+      "label": "Link secundario"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Krea3D — Nosotros"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,39 @@
+{
+  "general": {
+    "pagination": {
+      "previous": "Anterior",
+      "next": "Siguiente"
+    },
+    "search": {
+      "placeholder": "Buscar productos...",
+      "submit": "Buscar"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Agregar al carrito",
+      "sold_out": "Agotado",
+      "sale": "Oferta",
+      "unavailable": "No disponible",
+      "quantity": {
+        "label": "Cantidad"
+      }
+    },
+    "facets": {
+      "sort_by_label": "Ordenar por"
+    }
+  },
+  "cart": {
+    "title": "Carrito",
+    "empty": "Tu carrito está vacío",
+    "checkout": "Finalizar compra",
+    "total": "Total",
+    "continue_shopping": "Seguir comprando"
+  },
+  "accessibility": {
+    "skip_to_content": "Ir al contenido principal",
+    "close": "Cerrar",
+    "open_menu": "Abrir menú",
+    "close_menu": "Cerrar menú"
+  }
+}

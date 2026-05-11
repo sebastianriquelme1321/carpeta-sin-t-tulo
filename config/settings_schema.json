@@ -1,0 +1,56 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Krea3D",
+    "theme_version": "1.0.0",
+    "theme_author": "Krea3D",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Color de acento (rosa)",
+        "default": "#d4849a"
+      },
+      {
+        "type": "color",
+        "id": "color_accent2",
+        "label": "Color secundario (verde)",
+        "default": "#8fbf8a"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Fondo principal",
+        "default": "#faf6f1"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Texto principal",
+        "default": "#2a2220"
+      }
+    ]
+  },
+  {
+    "name": "Tipografía",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Fuente de títulos",
+        "default": "cormorant_garamond_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Fuente de texto",
+        "default": "nunito_n4"
+      }
+    ]
+  }
+]

@@ -1,0 +1,162 @@
+
+{%- assign form_id = 'krea3d-order-form' -%}
+
+<section class="krea3d-section krea3d-form-section" id="pedido">
+  <div class="krea3d-form-wrap">
+    <div class="krea3d-section-header">
+      <span class="krea3d-section-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="krea3d-section-title">{{ section.settings.heading }}</h2>
+    </div>
+
+    {%- if form.posted_successfully? -%}
+      <div style="text-align:center;padding:64px 40px;background:var(--k-card);border-radius:var(--k-radius);border:1px solid var(--k-border);margin-top:44px;">
+        <div style="font-size:48px;margin-bottom:16px;">🎉</div>
+        <h3 style="font-family:var(--k-font-head);font-size:30px;color:var(--k-text);margin:0 0 12px;">¡Pedido recibido!</h3>
+        <p style="font-family:var(--k-font-body);color:var(--k-text2);line-height:1.75;">
+          Gracias por tu pedido. Nos contactaremos contigo en menos de 24 horas con todos los detalles.
+        </p>
+        <a href="{{ section.settings.success_redirect | default: '/' }}" class="krea3d-btn-primary" style="margin-top:24px;display:inline-block;">Volver al inicio</a>
+      </div>
+    {%- else -%}
+      {%- form 'contact', id: form_id -%}
+        <div class="krea3d-form">
+          {%- if form.errors -%}
+            <div style="color:#e85a5a;font-family:var(--k-font-body);font-size:14px;margin-bottom:20px;padding:12px 16px;background:rgba(232,90,90,0.08);border-radius:8px;">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <div class="krea3d-form__row">
+            <div>
+              <label for="krea3d-name">Tu nombre</label>
+              <input
+                type="text"
+                id="krea3d-name"
+                name="contact[nombre]"
+                placeholder="Ej: María García"
+                required
+                value="{{ form.name }}"
+              >
+            </div>
+            <div>
+              <label for="krea3d-email">Email</label>
+              <input
+                type="email"
+                id="krea3d-email"
+                name="contact[email]"
+                placeholder="tu@email.com"
+                required
+                value="{{ form.email }}"
+              >
+            </div>
+          </div>
+
+          <div class="krea3d-form__group">
+            <label for="krea3d-tipo">Tipo de producto</label>
+            <select id="krea3d-tipo" name="contact[tipo_producto]" required>
+              <option value="">Selecciona una categoría...</option>
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'product_type' -%}
+                  <option value="{{ block.settings.value }}">{{ block.settings.label }}</option>
+                {%- endif -%}
+              {%- endfor -%}
+            </select>
+          </div>
+
+          <div class="krea3d-form__group">
+            <label for="krea3d-desc">Describe tu idea</label>
+            <textarea
+              id="krea3d-desc"
+              name="contact[descripcion]"
+              rows="4"
+              placeholder="Cuéntanos qué quieres, colores, tamaño, referencia..."
+              required
+            >{{ form.body }}</textarea>
+          </div>
+
+          <div class="krea3d-form__group">
+            <label for="krea3d-dim">Dimensiones aproximadas <span>(opcional)</span></label>
+            <input
+              type="text"
+              id="krea3d-dim"
+              name="contact[dimensiones]"
+              placeholder="Ej: 15cm de alto, tamaño mano..."
+            >
+          </div>
+
+          <input type="hidden" name="contact[asunto]" value="Pedido personalizado desde la web">
+
+          <button type="submit" class="krea3d-form__submit">
+            {{ section.settings.submit_label }} →
+          </button>
+        </div>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Krea3D — Pedido personalizado",
+  "tag": "section",
+  "class": "krea3d-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto pequeño superior",
+      "default": "Diseña algo único"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Pedido Personalizado"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Texto del botón",
+      "default": "Enviar Pedido"
+    },
+    {
+      "type": "url",
+      "id": "success_redirect",
+      "label": "URL de redirección al enviar"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_type",
+      "name": "Tipo de producto",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etiqueta visible",
+          "default": "Flores decorativas"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Valor del campo",
+          "default": "flores-decorativas"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Krea3D — Pedido personalizado",
+      "blocks": [
+        { "type": "product_type", "settings": { "label": "Flores decorativas",   "value": "flores" } },
+        { "type": "product_type", "settings": { "label": "Macetero",             "value": "macetero" } },
+        { "type": "product_type", "settings": { "label": "Figura coleccionable", "value": "figura" } },
+        { "type": "product_type", "settings": { "label": "Lámpara / Pantalla",   "value": "lampara" } },
+        { "type": "product_type", "settings": { "label": "Joyería / Accesorio",  "value": "joyeria" } },
+        { "type": "product_type", "settings": { "label": "Otro",                 "value": "otro" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,113 @@
+{
+  "sections": {
+    "krea3d-hero": {
+      "type": "krea3d-hero",
+      "settings": {
+        "eyebrow": "Impresiones 3D Decorativas",
+        "title_line1": "Arte que nunca",
+        "title_line2": "se marchita",
+        "cta_label": "Explorar colección",
+        "cta_link": "\/collections\/all",
+        "hero_color1": "#d4849a",
+        "hero_color2": "#8fbf8a"
+      }
+    },
+    "krea3d-products": {
+      "type": "krea3d-products",
+      "settings": {
+        "heading": "Más vendidos",
+        "products_count": 8,
+        "card_bg": "#e8f0e4",
+        "icon_color": "#8fbf8a",
+        "show_all_link": true,
+        "all_label": "Ver toda la colección →"
+      }
+    },
+    "krea3d-process": {
+      "type": "krea3d-process",
+      "settings": {
+        "eyebrow": "Simple y sin complicaciones",
+        "heading": "Cómo funciona"
+      },
+      "blocks": {
+        "step1": {
+          "type": "step",
+          "settings": {
+            "title": "Elige o diseña",
+            "description": "Explora nuestro catálogo o cuéntanos tu idea. Cualquier forma, cualquier tamaño, cualquier sueño."
+          }
+        },
+        "step2": {
+          "type": "step",
+          "settings": {
+            "title": "Imprimimos",
+            "description": "Fabricamos tu pieza capa a capa con materiales premium y atención obsesiva al detalle."
+          }
+        },
+        "step3": {
+          "type": "step",
+          "settings": {
+            "title": "Lo recibes",
+            "description": "Empacamos cada pedido con cuidado y lo enviamos directo a tu puerta, listo para disfrutar."
+          }
+        }
+      },
+      "block_order": ["step1", "step2", "step3"]
+    },
+    "krea3d-gallery": {
+      "type": "krea3d-gallery",
+      "settings": {
+        "eyebrow": "Inspiración para tu espacio",
+        "heading": "Galería de Trabajos"
+      },
+      "blocks": {
+        "img1": { "type": "image", "settings": { "label": "Jarrón Minimalista", "wide": false, "tall": false } },
+        "img2": { "type": "image", "settings": { "label": "Flores de Seda 3D",  "wide": false, "tall": true  } },
+        "img3": { "type": "image", "settings": { "label": "Arte Geométrico",    "wide": false, "tall": false } },
+        "img4": { "type": "image", "settings": { "label": "Set de Luces",       "wide": true,  "tall": false } },
+        "img5": { "type": "image", "settings": { "label": "Lámpara Pétalo",     "wide": false, "tall": false } }
+      },
+      "block_order": ["img1", "img2", "img3", "img4", "img5"]
+    },
+    "krea3d-about": {
+      "type": "krea3d-about",
+      "settings": {
+        "eyebrow": "Pasión en cada capa",
+        "heading": "Nuestra historia",
+        "paragraph1": "Krea3D nació de una pasión por transformar ideas en objetos tangibles. Somos un emprendimiento dedicado a la impresión 3D decorativa, donde cada pieza es diseñada y fabricada con amor y atención al detalle.",
+        "paragraph2": "Desde flores que nunca se marchitan hasta figuras coleccionables y lámparas únicas — creemos que el arte puede estar en cada rincón de tu hogar.",
+        "badge_number": "100%",
+        "badge_label": "Hecho a mano",
+        "cta_label": "Hacer un pedido",
+        "cta_link": "#pedido",
+        "link2_label": "Ver la galería",
+        "link2_url": "#galeria"
+      }
+    },
+    "krea3d-order": {
+      "type": "krea3d-custom-order",
+      "settings": {
+        "eyebrow": "Diseña algo único",
+        "heading": "Pedido Personalizado",
+        "submit_label": "Enviar Pedido"
+      },
+      "blocks": {
+        "t1": { "type": "product_type", "settings": { "label": "Flores decorativas",   "value": "flores"   } },
+        "t2": { "type": "product_type", "settings": { "label": "Macetero",             "value": "macetero" } },
+        "t3": { "type": "product_type", "settings": { "label": "Figura coleccionable", "value": "figura"   } },
+        "t4": { "type": "product_type", "settings": { "label": "Lámpara / Pantalla",   "value": "lampara"  } },
+        "t5": { "type": "product_type", "settings": { "label": "Joyería / Accesorio",  "value": "joyeria"  } },
+        "t6": { "type": "product_type", "settings": { "label": "Otro",                 "value": "otro"     } }
+      },
+      "block_order": ["t1","t2","t3","t4","t5","t6"]
+    }
+  },
+  "order": [
+    "krea3d-hero",
+    "krea3d-products",
+    "krea3d-process",
+    "krea3d-gallery",
+    "krea3d-about",
+    "krea3d-order"
+  ]
+}

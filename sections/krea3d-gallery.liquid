@@ -1,0 +1,94 @@
+
+<section class="krea3d-section krea3d-gallery" id="galeria">
+  <div style="max-width:1240px;margin:0 auto;">
+    <div class="krea3d-section-header">
+      <span class="krea3d-section-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="krea3d-section-title">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="krea3d-gallery__grid">
+      {%- for block in section.blocks -%}
+        <div
+          class="krea3d-gallery__item{% if block.settings.wide %} krea3d-gallery__item--wide{% endif %}{% if block.settings.tall %} krea3d-gallery__item--tall{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.image != blank -%}
+            {%- assign img_src = block.settings.image | img_url: '900x' -%}
+            <img src="{{ img_src }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+          {%- else -%}
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--k-bg3),var(--k-bg2));"></div>
+          {%- endif -%}
+          <div class="krea3d-gallery__label">
+            <span>{{ block.settings.label }}</span>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Krea3D — Galería",
+  "tag": "section",
+  "class": "krea3d-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto pequeño superior",
+      "default": "Inspiración para tu espacio"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Galería de Trabajos"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Imagen",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etiqueta (al hacer hover)",
+          "default": "Diseño Krea3D"
+        },
+        {
+          "type": "checkbox",
+          "id": "wide",
+          "label": "Imagen ancha (2 columnas)",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "tall",
+          "label": "Imagen alta (2 filas)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Krea3D — Galería",
+      "blocks": [
+        { "type": "image", "settings": { "label": "Jarrón Minimalista", "wide": false, "tall": false } },
+        { "type": "image", "settings": { "label": "Flores de Seda 3D",  "wide": false, "tall": true  } },
+        { "type": "image", "settings": { "label": "Arte Geométrico",    "wide": false, "tall": false } },
+        { "type": "image", "settings": { "label": "Set de Luces",       "wide": true,  "tall": false } },
+        { "type": "image", "settings": { "label": "Lámpara Pétalo",     "wide": false, "tall": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

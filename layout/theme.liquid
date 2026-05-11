@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <title>
+    {%- if template.name == 'index' -%}
+      {{ shop.name }}{% if page_title != blank %} — {{ page_title }}{% endif %}
+    {%- elsif page_title == blank -%}
+      {{ shop.name }}
+    {%- else -%}
+      {{ page_title }} — {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {{ content_for_header }}
+
+  {{ 'krea3d.css' | asset_url | stylesheet_tag }}
+</head>
+
+<body class="template-{{ template.name | handle }}">
+
+  <nav class="krea3d-nav" id="krea3d-nav">
+    <ul class="krea3d-nav__links" role="list">
+      <li><a href="{{ routes.all_products_collection_url }}">Catálogo</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#galeria">Galería</a></li>
+    </ul>
+
+    <a class="krea3d-nav__logo" href="{{ routes.root_url }}">
+      KREA<span>3D</span>
+    </a>
+
+    <div class="krea3d-nav__right">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#pedido">Pedido</a>
+      <button
+        class="krea3d-nav__icon"
+        aria-label="Carrito ({{ cart.item_count }} artículos)"
+        onclick="window.location='{{ routes.cart_url }}'"
+        type="button"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="krea3d-nav__cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  <footer class="krea3d-footer">
+    <div class="krea3d-footer__inner">
+      <div>
+        <a class="krea3d-footer__logo" href="{{ routes.root_url }}">
+          KREA<span>3D</span>
+        </a>
+        <p class="krea3d-footer__desc">Arte que nunca se marchita. Impresiones 3D decorativas hechas con amor.</p>
+      </div>
+      <div class="krea3d-footer__col">
+        <h4>Tienda</h4>
+        <a href="{{ routes.all_products_collection_url }}">Catálogo</a>
+        <a href="#proceso">Cómo funciona</a>
+        <a href="#pedido">Pedido personalizado</a>
+      </div>
+      <div class="krea3d-footer__col">
+        <h4>Nosotros</h4>
+        <a href="#nosotros">Nuestra historia</a>
+        <a href="#galeria">Galería</a>
+      </div>
+      <div class="krea3d-footer__col">
+        <h4>Contacto</h4>
+        {%- if shop.email != blank -%}
+          <a href="mailto:{{ shop.email }}">{{ shop.email }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="krea3d-footer__bottom">
+      <p class="krea3d-footer__copy">
+        © {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('krea3d-nav');
+      if (!nav) return;
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 56);
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>

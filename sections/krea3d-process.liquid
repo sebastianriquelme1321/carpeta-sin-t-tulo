@@ -1,0 +1,90 @@
+
+<section class="krea3d-section krea3d-process" id="proceso">
+  <div style="max-width:1240px;margin:0 auto;">
+    <div class="krea3d-section-header">
+      <span class="krea3d-section-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="krea3d-section-title">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="krea3d-process__grid">
+      {%- for block in section.blocks -%}
+        <div class="krea3d-process__step" {{ block.shopify_attributes }}>
+          <div class="krea3d-process__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Krea3D — Proceso",
+  "tag": "section",
+  "class": "krea3d-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto pequeño superior",
+      "default": "Simple y sin complicaciones"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Cómo funciona"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Paso",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título del paso",
+          "default": "Elige o diseña"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Explora nuestro catálogo o cuéntanos tu idea. Cualquier forma, cualquier tamaño, cualquier sueño."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Krea3D — Proceso",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Elige o diseña",
+            "description": "Explora nuestro catálogo o cuéntanos tu idea. Cualquier forma, cualquier tamaño, cualquier sueño."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Imprimimos",
+            "description": "Fabricamos tu pieza capa a capa con materiales premium y atención obsesiva al detalle."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Lo recibes",
+            "description": "Empacamos cada pedido con cuidado y lo enviamos directo a tu puerta, listo para disfrutar."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

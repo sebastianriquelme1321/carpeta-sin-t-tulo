@@ -1,0 +1,131 @@
+
+<section class="krea3d-section krea3d-hero" id="krea3d-hero">
+  <div class="krea3d-hero__bg-wrap">
+    <svg class="krea3d-hero__bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"
+      xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <radialGradient id="krea-hbg" cx="55%" cy="45%" r="80%">
+          <stop offset="0%" stop-color="{{ section.settings.hero_color2 }}" stop-opacity="0.95" />
+          <stop offset="60%" stop-color="{{ section.settings.hero_color1 }}" stop-opacity="0.98" />
+          <stop offset="100%" stop-color="{{ section.settings.hero_color1 }}" stop-opacity="1" />
+        </radialGradient>
+      </defs>
+      <rect width="1440" height="900" fill="url(#krea-hbg)" />
+      {%- for r in '0,51,102,153,204,255,306' | split: ',' -%}
+        <ellipse cx="240" cy="620"
+          rx="{% if r == '0' or r == '102' %}22{% else %}16{% endif %}" ry="{% if r == '0' or r == '102' %}90{% else %}66{% endif %}"
+          fill="white" opacity="0.16" transform="rotate({{ r }} 240 620)" />
+      {%- endfor -%}
+      <circle cx="240" cy="620" r="28" fill="white" opacity="0.24" />
+      <line x1="240" y1="648" x2="280" y2="900" stroke="white" stroke-width="2" opacity="0.12" />
+      <line x1="230" y1="648" x2="160" y2="900" stroke="white" stroke-width="1.5" opacity="0.09" />
+      {%- for r in '0,60,120,180,240,300' | split: ',' -%}
+        <ellipse cx="1240" cy="200" rx="14" ry="56"
+          fill="white" opacity="0.14" transform="rotate({{ r }} 1240 200)" />
+      {%- endfor -%}
+      <circle cx="1240" cy="200" r="20" fill="white" opacity="0.2" />
+      <line x1="1240" y1="220" x2="1280" y2="480" stroke="white" stroke-width="2" opacity="0.1" />
+      {%- for r in '0,60,120,180,240,300' | split: ',' -%}
+        <ellipse cx="180" cy="160" rx="8" ry="28"
+          fill="white" opacity="0.1" transform="rotate({{ r }} 180 160)" />
+      {%- endfor -%}
+      <circle cx="180" cy="160" r="10" fill="white" opacity="0.15" />
+      <path d="M1100 760 Q1100 680 1148 660 Q1196 680 1196 760Z" fill="white" opacity="0.11" />
+      <line x1="1100" y1="762" x2="1196" y2="762" stroke="white" stroke-width="1.5" opacity="0.13" />
+      <rect x="1140" y="762" width="8" height="28" rx="4" fill="white" opacity="0.1" />
+      {%- assign dots = "80,300|350,780|720,820|960,100|1050,500|1380,400|580,50|1380,750" | split: '|' -%}
+      {%- for d in dots -%}
+        {%- assign xy = d | split: ',' -%}
+        <circle cx="{{ xy[0] }}" cy="{{ xy[1] }}" r="4" fill="white" opacity="0.07" />
+      {%- endfor -%}
+    </svg>
+  </div>
+
+  <div class="krea3d-hero__overlay"></div>
+
+  <div class="krea3d-hero__content">
+    <span class="krea3d-hero__eyebrow">✦&nbsp;&nbsp;{{ section.settings.eyebrow }}</span>
+    <h1 class="krea3d-hero__title">
+      {{ section.settings.title_line1 }}<br>
+      <em>{{ section.settings.title_line2 }}</em>
+    </h1>
+    <a href="{{ section.settings.cta_link }}" class="krea3d-hero__cta">
+      {{ section.settings.cta_label }}
+    </a>
+  </div>
+
+  <div class="krea3d-hero__scroll" aria-hidden="true">
+    <div class="krea3d-hero__scroll-line"></div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var nav = document.querySelector('.shopify-section + .shopify-section .krea3d-nav, header');
+    var hero = document.getElementById('krea3d-hero');
+    if (!hero) return;
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 56) {
+        if (nav) nav.classList.add('scrolled');
+      } else {
+        if (nav) nav.classList.remove('scrolled');
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Krea3D — Hero",
+  "tag": "section",
+  "class": "krea3d-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto pequeño superior",
+      "default": "Impresiones 3D Decorativas"
+    },
+    {
+      "type": "text",
+      "id": "title_line1",
+      "label": "Título línea 1",
+      "default": "Arte que nunca"
+    },
+    {
+      "type": "text",
+      "id": "title_line2",
+      "label": "Título línea 2 (cursiva)",
+      "default": "se marchita"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto del botón",
+      "default": "Explorar colección"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link del botón"
+    },
+    {
+      "type": "color",
+      "id": "hero_color1",
+      "label": "Color principal del fondo",
+      "default": "#d4849a"
+    },
+    {
+      "type": "color",
+      "id": "hero_color2",
+      "label": "Color secundario del fondo",
+      "default": "#8fbf8a"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Krea3D — Hero"
+    }
+  ]
+}
+{% endschema %}
