@@ -1,0 +1,53 @@
+{{ 'krea3d.css' | asset_url | stylesheet_tag }}
+
+<div style="max-width:860px;margin:0 auto;padding:72px clamp(20px,4vw,40px);font-family:'Nunito',sans-serif;">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:300;color:#2a2220;margin-bottom:40px;">
+    Tu carrito
+  </h1>
+
+  {%- if cart.item_count == 0 -%}
+    <div style="text-align:center;padding:80px 0;">
+      <p style="font-size:64px;margin-bottom:16px;">🛒</p>
+      <p style="font-size:18px;color:#8a7068;margin-bottom:32px;">Tu carrito está vacío</p>
+      <a href="{{ routes.all_products_collection_url }}" class="krea3d-btn-primary">Ver catálogo</a>
+    </div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post">
+      {%- for item in cart.items -%}
+        <div style="display:flex;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid #e8ddd8;">
+          <a href="{{ item.url }}" style="flex-shrink:0;">
+            {%- if item.image -%}
+              <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.image.alt | escape }}"
+                width="96" height="96" style="border-radius:10px;object-fit:cover;background:#f5ede8;">
+            {%- else -%}
+              <div style="width:96px;height:96px;border-radius:10px;background:#f5ede8;display:flex;align-items:center;justify-content:center;font-size:32px;">🌸</div>
+            {%- endif -%}
+          </a>
+          <div style="flex:1;">
+            <a href="{{ item.url }}" style="font-size:16px;font-weight:600;color:#2a2220;text-decoration:none;">{{ item.product_title }}</a>
+            {%- if item.variant_title != blank -%}
+              <p style="font-size:13px;color:#8a7068;margin:4px 0 0;">{{ item.variant_title }}</p>
+            {%- endif -%}
+            <p style="font-size:15px;color:#d4849a;font-weight:700;margin:8px 0 0;">{{ item.final_price | money }}</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <input type="number" name="updates[]" value="{{ item.quantity }}" min="0"
+              style="width:56px;text-align:center;padding:8px;border:1.5px solid #e8ddd8;border-radius:8px;font-family:'Nunito',sans-serif;font-size:14px;">
+          </div>
+        </div>
+      {%- endfor -%}
+
+      <div style="margin-top:32px;text-align:right;">
+        <p style="font-size:18px;font-weight:700;color:#2a2220;margin-bottom:24px;">
+          Total: <span style="color:#d4849a;">{{ cart.total_price | money }}</span>
+        </p>
+        <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;">
+          <button type="submit" name="update" style="padding:12px 24px;border:1.5px solid #e8ddd8;border-radius:10px;background:white;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;color:#5e4f46;">
+            Actualizar carrito
+          </button>
+          <a href="{{ routes.checkout }}" class="krea3d-btn-primary">Finalizar compra →</a>
+        </div>
+      </div>
+    </form>
+  {%- endif -%}
+</div>

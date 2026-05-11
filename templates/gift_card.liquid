@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tarjeta de regalo — {{ shop.name }}</title>
+  {{ content_for_header }}
+  {{ 'krea3d.css' | asset_url | stylesheet_tag }}
+</head>
+<body style="font-family:'Nunito',sans-serif;background:#faf6f1;color:#2a2220;">
+  <div style="max-width:560px;margin:0 auto;padding:72px 24px;text-align:center;">
+    <a href="{{ routes.root_url }}" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#2a2220;text-decoration:none;letter-spacing:.08em;display:block;margin-bottom:48px;">
+      KREA<span style="color:#d4849a;">3D</span>
+    </a>
+
+    <div style="background:linear-gradient(135deg,#d4849a,#8fbf8a);border-radius:16px;padding:48px;color:white;margin-bottom:40px;">
+      <p style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-bottom:12px;">Tarjeta de regalo</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;margin:0 0 16px;">{{ gift_card.initial_value | money_without_trailing_zeros }}</p>
+      <p style="font-size:14px;opacity:.85;">{{ shop.name }}</p>
+    </div>
+
+    {%- if gift_card.enabled -%}
+      <div style="background:white;border-radius:12px;border:1px solid #e8ddd8;padding:28px;margin-bottom:24px;">
+        <p style="font-size:13px;color:#8a7068;margin-bottom:12px;">Código de la tarjeta</p>
+        <p style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:#2a2220;letter-spacing:.08em;word-break:break-all;">
+          {{ gift_card.code | format_code }}
+        </p>
+        {%- if gift_card.balance != gift_card.initial_value -%}
+          <p style="font-size:13px;color:#8a7068;margin-top:12px;">
+            Saldo restante: <strong style="color:#d4849a;">{{ gift_card.balance | money }}</strong>
+          </p>
+        {%- endif -%}
+      </div>
+      <a href="{{ routes.root_url }}" class="krea3d-btn-primary">Ir a la tienda</a>
+    {%- else -%}
+      <p style="color:#8a7068;">Esta tarjeta de regalo ya no está activa.</p>
+    {%- endif -%}
+  </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{{ 'krea3d.css' | asset_url | stylesheet_tag }}
+
+<div style="max-width:1440px;margin:0 auto;padding:72px clamp(20px,3vw,44px);">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;color:#2a2220;text-align:center;margin-bottom:48px;">
+    Nuestras colecciones
+  </h1>
+  <div class="krea3d-products__grid">
+    {%- for collection in collections -%}
+      <a href="{{ collection.url }}" class="krea3d-product-card">
+        <div class="krea3d-product-card__image" style="background:#e8f0e4;">
+          {%- if collection.image -%}
+            <img src="{{ collection.image | image_url: width: 600 }}"
+              alt="{{ collection.image.alt | escape }}" loading="lazy" width="600" height="600">
+          {%- else -%}
+            <div style="font-size:56px;opacity:.4;">🌸</div>
+          {%- endif -%}
+        </div>
+        <div class="krea3d-product-card__info">
+          <span class="krea3d-product-card__name">{{ collection.title }}</span>
+          <div class="krea3d-product-card__bottom">
+            <span style="font-size:13px;color:#8a7068;">{{ collection.products_count }} productos</span>
+            <span class="krea3d-product-card__buy">VER →</span>
+          </div>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>

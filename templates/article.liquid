@@ -1,0 +1,35 @@
+{{ 'krea3d.css' | asset_url | stylesheet_tag }}
+
+<div style="max-width:740px;margin:0 auto;padding:72px clamp(20px,4vw,40px);font-family:'Nunito',sans-serif;">
+  <a href="{{ blog.url }}" style="font-size:13px;font-weight:700;color:#d4849a;text-decoration:none;letter-spacing:.04em;">
+    ← {{ blog.title }}
+  </a>
+
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;color:#2a2220;margin:20px 0 12px;line-height:1.1;">
+    {{ article.title }}
+  </h1>
+  <p style="font-size:13px;color:#8a7068;margin-bottom:40px;">
+    {{ article.published_at | date: '%d de %B, %Y' }}
+    {%- if article.author != blank %} · {{ article.author }}{%- endif -%}
+  </p>
+
+  {%- if article.image -%}
+    <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | escape }}"
+      style="width:100%;border-radius:12px;margin-bottom:40px;aspect-ratio:16/9;object-fit:cover;" loading="lazy">
+  {%- endif -%}
+
+  <div style="font-size:17px;line-height:1.85;color:#2a2220;">
+    {{ article.content }}
+  </div>
+
+  {%- if article.tags.size > 0 -%}
+    <div style="margin-top:48px;padding-top:24px;border-top:1px solid #e8ddd8;display:flex;gap:8px;flex-wrap:wrap;">
+      {%- for tag in article.tags -%}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}"
+          style="background:rgba(212,132,154,.1);color:#d4849a;padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;text-decoration:none;letter-spacing:.06em;">
+          {{ tag }}
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>

@@ -24,11 +24,11 @@
 <body class="template-{{ template.name | handle }}">
 
   <nav class="krea3d-nav" id="krea3d-nav">
-    <ul class="krea3d-nav__links" role="list">
-      <li><a href="{{ routes.all_products_collection_url }}">Catálogo</a></li>
-      <li><a href="#proceso">Proceso</a></li>
-      <li><a href="#galeria">Galería</a></li>
-    </ul>
+    <div class="krea3d-nav__links">
+      <a href="{{ routes.all_products_collection_url }}">Catálogo</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#galeria">Galería</a>
+    </div>
 
     <a class="krea3d-nav__logo" href="{{ routes.root_url }}">
       KREA<span>3D</span>

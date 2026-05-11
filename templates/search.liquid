@@ -1,0 +1,48 @@
+{{ 'krea3d.css' | asset_url | stylesheet_tag }}
+
+<div style="max-width:1100px;margin:0 auto;padding:72px clamp(20px,4vw,40px);font-family:'Nunito',sans-serif;">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:300;color:#2a2220;text-align:center;margin-bottom:32px;">
+    Buscar
+  </h1>
+
+  <form action="{{ routes.search_url }}" method="get" style="max-width:540px;margin:0 auto 56px;display:flex;gap:10px;">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Buscar productos..."
+      style="flex:1;padding:13px 18px;border:1.5px solid #e8ddd8;border-radius:10px;font-family:'Nunito',sans-serif;font-size:15px;background:#faf6f1;outline:none;color:#2a2220;"
+      onfocus="this.style.borderColor='#d4849a'" onblur="this.style.borderColor='#e8ddd8'">
+    <button type="submit" class="krea3d-btn-primary" style="padding:13px 24px;">Buscar</button>
+  </form>
+
+  {%- if search.performed -%}
+    {%- if search.results_count == 0 -%}
+      <p style="text-align:center;color:#8a7068;font-size:16px;">
+        No se encontraron resultados para "<strong>{{ search.terms }}</strong>"
+      </p>
+    {%- else -%}
+      <p style="text-align:center;color:#8a7068;font-size:14px;margin-bottom:32px;">
+        {{ search.results_count }} resultado(s) para "{{ search.terms }}"
+      </p>
+      <div class="krea3d-products__grid">
+        {%- for item in search.results -%}
+          <a href="{{ item.url }}" class="krea3d-product-card">
+            <div class="krea3d-product-card__image" style="background:#e8f0e4;">
+              {%- if item.featured_image -%}
+                <img src="{{ item.featured_image | image_url: width: 600 }}"
+                  alt="{{ item.featured_image.alt | escape }}" loading="lazy" width="600" height="600">
+              {%- else -%}
+                <div style="font-size:48px;opacity:.4;">🌸</div>
+              {%- endif -%}
+            </div>
+            <div class="krea3d-product-card__info">
+              <span class="krea3d-product-card__name">{{ item.title }}</span>
+              <div class="krea3d-product-card__bottom">
+                {%- if item.price -%}
+                  <span class="krea3d-product-card__price">{{ item.price | money }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
